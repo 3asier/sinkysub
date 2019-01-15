@@ -37,7 +37,7 @@ public class Bubble extends Mob {
     }
 
     public void render(Canvas canvas) {
-        canvas.drawBitmap(images[(int) Math.floor(age / animScale)], pos.x, pos.y, null);
+        canvas.drawBitmap(Bitmap.createScaledBitmap(images[(int) Math.floor(age / animScale)], 16, 16, false), pos.x, pos.y, null);
     }
 
 }

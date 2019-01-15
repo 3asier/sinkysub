@@ -9,7 +9,7 @@ import com.highorizon.sinkysub.GameView;
 
 public class Background_Sand extends BackgroundImage {
 
-    public static float speed = 5.0f;
+    public static float speed = 10.0f;
 
     public static Bitmap image = GameView.sand_0;
 

@@ -31,7 +31,7 @@ public class Sub extends Mob {
             yVel -= 2.0;
         } else {
             yVel += 2.0;
-            if (random.nextInt(2) == 0) world.add(new Bubble(new PointF(pos.x, pos.y), world));
+            if (random.nextInt(2) == 0) world.add(new Bubble(new PointF(pos.x + 80, pos.y + 20), world));
         }
 
         clampVel();
