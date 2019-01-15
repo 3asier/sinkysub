@@ -27,13 +27,15 @@ public class GameView extends View {
     Rect screenSize;
 
     //Background Textures.
+    public static Bitmap ocean;
     public static Bitmap sand_0;
+    public static Bitmap rock_0;
 
     //Bubble Textures.
     public static Bitmap[] bubbles;
 
     //Sub Textures.
-    public static Bitmap sub_0;
+    public static Bitmap[] subs;
 
     World world;
 
@@ -48,9 +50,11 @@ public class GameView extends View {
         };
 
         //LOADING IMAGES
+        ocean = BitmapFactory.decodeResource(getResources(), R.drawable.ocean_background);
         sand_0 = BitmapFactory.decodeResource(getResources(), R.drawable.sand);
+        rock_0 = BitmapFactory.decodeResource(getResources(), R.drawable.rock_0);
 
-        bubbles = new Bitmap[] {
+        bubbles = new Bitmap[]{
                 BitmapFactory.decodeResource(getResources(), R.drawable.bubble_0),
                 BitmapFactory.decodeResource(getResources(), R.drawable.bubble_1),
                 BitmapFactory.decodeResource(getResources(), R.drawable.bubble_2),
@@ -61,9 +65,14 @@ public class GameView extends View {
                 BitmapFactory.decodeResource(getResources(), R.drawable.bubble_7)
         };
 
-        sub_0 = BitmapFactory.decodeResource(getResources(), R.drawable.sub);
+        subs = new Bitmap[]{
+                BitmapFactory.decodeResource(getResources(), R.drawable.sub_0),
+                BitmapFactory.decodeResource(getResources(), R.drawable.sub_1),
+                BitmapFactory.decodeResource(getResources(), R.drawable.sub_2),
+                BitmapFactory.decodeResource(getResources(), R.drawable.sub_3)
+        };
 
-        display = ((Activity)getContext()).getWindowManager().getDefaultDisplay();
+        display = ((Activity) getContext()).getWindowManager().getDefaultDisplay();
         point = new Point();
         display.getSize(point);
         dWidth = point.x;
@@ -80,6 +89,7 @@ public class GameView extends View {
 
         world.update();
 
+        canvas.drawBitmap(ocean, null, screenSize, null);
         world.render(canvas);
 
         handler.postDelayed(runnable, UPDATE_MILLIS);
