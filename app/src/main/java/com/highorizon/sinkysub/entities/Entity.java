@@ -1,20 +1,21 @@
 package com.highorizon.sinkysub.entities;
 
 import android.graphics.Point;
+import android.graphics.PointF;
 
 public abstract class Entity {
 
-    protected Point pos;
+    protected PointF pos;
 
-    public Entity(Point pos) {
+    public Entity(PointF pos) {
         this.pos = pos;
     }
 
-    public void setPos(Point pos) {
+    public void setPos(PointF pos) {
         this.pos = pos;
     }
 
-    public Point getPos() {
+    public PointF getPos() {
         return pos;
     }
 

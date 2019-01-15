@@ -2,40 +2,41 @@ package com.highorizon.sinkysub;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.Rect;
 
+import com.highorizon.sinkysub.entities.Bubble;
 import com.highorizon.sinkysub.entities.Mob;
 
-public class Sub extends Mob implements GameObject{
+public class Sub extends Mob {
 
-    private float maxYVel = 5.0f;
+    private World world;
 
-    private Bitmap image;
+    private float maxYVel = 20.0f;
+
+    private Bitmap image = GameView.sub_0;
     private Rect hitBox;
 
-    private boolean tap;
+    private boolean tap = false;
 
-    public Sub(Point pos, Bitmap image) {
-        super(pos, 2.0f, 0.0f);
-        this.image = image;
+    public Sub(World world) {
+        super(new PointF(world.screenSize.width() / 9, world.screenSize.height() / 3), 0.0f, 0.0f);
+        this.world = world;
         hitBox = new Rect();
     }
 
     @Override
     public void update() {
         if (tap) {
-            yVel -= 0.4;
+            yVel -= 2.0;
         } else {
-            yVel += 0.4;
+            yVel += 2.0;
+            if (random.nextInt(2) == 0) world.add(new Bubble(new PointF(pos.x, pos.y), world));
         }
 
         clampVel();
 
         super.move();
-        System.out.println(yVel);
     }
 
     private void clampVel() {
@@ -43,12 +44,16 @@ public class Sub extends Mob implements GameObject{
         if (yVel < -maxYVel) yVel = -maxYVel;
     }
 
-    public void setTap(boolean tap) {
-        this.tap = tap;
+    public void tapDown() {
+        this.tap = true;
+    }
+
+    public void tapUp() {
+        this.tap = false;
     }
 
     @Override
-    public void draw(Canvas canvas) {
+    public void render(Canvas canvas) {
         canvas.drawBitmap(image, pos.x, pos.y, null);
     }
 }
