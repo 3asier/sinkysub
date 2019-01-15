@@ -17,7 +17,7 @@ public class GameView extends View {
 
     Handler handler; //Schedules a runnable after a certain delay
     Runnable runnable;
-    final int UPDATE_MILLIS = 30;
+    final int UPDATE_MILLIS = 1000 / 60;
 
     Bitmap background_0;
 
