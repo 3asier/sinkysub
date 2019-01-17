@@ -130,7 +130,12 @@ public class GameView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
-        if (action == MotionEvent.ACTION_DOWN) { //A tap on the screen;
+	int pointerCount = event.getPointerCount();
+
+	if(pointerCount == 5) {
+	    Toast.makeText(getApplicationContext(), "Looks like you got ligma!", Toast.LENGTH_SHORT).show();
+	}
+	if (action == MotionEvent.ACTION_DOWN) { //A tap on the screen;
             world.tapDown(new PointF(event.getX(), event.getY()));
         }
         if (action == MotionEvent.ACTION_UP) { //Input released from screen
