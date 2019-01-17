@@ -17,7 +17,17 @@ public class GameView extends View {
 
     Handler handler; //Schedules a runnable after a certain delay
     Runnable runnable;
-    final int UPDATE_MILLIS = 1000 / 60;
+
+    // Frame Limiter Variables
+    private final int MAX_FPS = 30;
+    private double averageFPS;
+
+    long startTime;
+    long timeMillis = 1000 / MAX_FPS;
+    long waitTime;
+    int frameCount = 0;
+    long totalTime = 0;
+    long targetTime = 1000 / MAX_FPS;
 
     Bitmap background_0;
 
@@ -41,6 +51,8 @@ public class GameView extends View {
 
     public GameView(Context context) {
         super(context);
+
+
         handler = new Handler();
         runnable = new Runnable() {
             @Override
@@ -87,12 +99,32 @@ public class GameView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        startTime = System.nanoTime();
+
+        // Start Calling Things
         world.update();
 
         canvas.drawBitmap(ocean, null, screenSize, null);
         world.render(canvas);
 
-        handler.postDelayed(runnable, UPDATE_MILLIS);
+        // Stop Calling things
+
+        timeMillis = (System.nanoTime() - startTime) / 1000000;
+        waitTime = targetTime - timeMillis;
+
+        if (waitTime > 0) { // Wait the required time.
+                this.postDelayed(runnable, waitTime);
+        }
+
+        totalTime += System.nanoTime() - startTime + waitTime * 1000000;
+        frameCount++;
+        if (frameCount == MAX_FPS) {
+            //System.out.println(totalTime / frameCount);
+            averageFPS = (int) 1000 / ((totalTime / frameCount) / 1000000);
+            frameCount = 0;
+            totalTime = 0;
+            System.out.println("AVERAGE FPS: " + averageFPS);
+        }
     }
 
     @Override
