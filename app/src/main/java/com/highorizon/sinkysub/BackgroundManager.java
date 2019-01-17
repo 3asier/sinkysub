@@ -5,17 +5,19 @@ import android.graphics.PointF;
 
 import com.highorizon.sinkysub.entities.Background_Rock;
 import com.highorizon.sinkysub.entities.Background_Sand;
+import com.highorizon.sinkysub.entities.Background_Top;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class BackgroundManager {
 
-    private World world;
+    public World world;
     private Random random = new Random();
 
     public ArrayList<Background_Sand> sands = new ArrayList<>();
     public ArrayList<Background_Rock> rocks = new ArrayList<>();
+    public ArrayList<Background_Top> tops = new ArrayList<>();
 
     public BackgroundManager(World world) {
         this.world = world;
@@ -31,6 +33,11 @@ public class BackgroundManager {
         for (int i = 0; i < widthNum; i++) {
             sands.add(new Background_Sand(new PointF(Background_Sand.image.getWidth() * i, world.screenSize.height() - Background_Sand.image.getHeight())));
         }
+
+        widthNum = (int) Math.ceil((float) world.screenSize.width() / Background_Top.image.getWidth()) + 1;
+        for (int i = 0; i < widthNum; i++) {
+            tops.add(new Background_Top(new PointF(Background_Top.image.getWidth() * i, 0), this));
+        }
     }
 
     /**
@@ -44,6 +51,15 @@ public class BackgroundManager {
             sands.remove(0);
             sands.add(new Background_Sand(new PointF(sands.get(sands.size() - 1).getPos().x + Background_Sand.image.getWidth(), world.screenSize.height() - Background_Sand.image.getHeight())));
         }
+
+        // Top of cave
+        for (Background_Top top : tops) top.update();
+
+        if (tops.get(0).getPos().x < -Background_Top.image.getWidth()) {
+            tops.remove(0);
+            tops.add(new Background_Top(new PointF(tops.get(tops.size() - 1).getPos().x + Background_Top.image.getWidth(), 0), this));
+        }
+
 
         for (Background_Rock r : rocks) r.update();
 
@@ -65,6 +81,8 @@ public class BackgroundManager {
     public void render(Canvas canvas) {
         for (Background_Rock r : rocks) r.render(canvas);
         for (Background_Sand sand : sands) sand.render(canvas);
+
+        for (Background_Top t : tops) t.render(canvas);
     }
 
 

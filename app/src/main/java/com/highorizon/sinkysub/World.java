@@ -13,7 +13,7 @@ public class World {
 
     public Rect screenSize;
 
-    private Sub player;
+    public Sub player;
 
     private BackgroundManager backgroundManager;
 

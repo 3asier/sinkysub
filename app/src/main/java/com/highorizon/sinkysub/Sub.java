@@ -16,6 +16,7 @@ public class Sub extends Mob {
     private World world;
 
     private float maxYVel = 20.0f;
+    private float speed = 10.0f;
 
     private int animCount = 0;
     private int animScale = random.nextInt(4) + 1;
@@ -69,5 +70,9 @@ public class Sub extends Mob {
         p.setColor(Color.RED);
         canvas.rotate(yVel, pos.x + images[0].getWidth() / 2, pos.y + images[0].getHeight() / 2);
         canvas.drawBitmap(images[(int) Math.floor(animCount / animScale)], pos.x, pos.y, null);
+    }
+
+    public float getSpeed() {
+        return speed;
     }
 }

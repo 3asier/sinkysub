@@ -28,5 +28,4 @@ public class Mob extends Entity {
     public void render(Canvas Canvas) {
 
     }
-
 }
