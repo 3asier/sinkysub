@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 public class GameView extends View {
 
@@ -133,7 +134,7 @@ public class GameView extends View {
 	int pointerCount = event.getPointerCount();
 
 	if(pointerCount == 5) {
-	    Toast.makeText(getApplicationContext(), "Looks like you got ligma!", Toast.LENGTH_SHORT).show();
+	    Toast.makeText(getContext(), "Looks like you got ligma!", Toast.LENGTH_SHORT).show();
 	}
 	if (action == MotionEvent.ACTION_DOWN) { //A tap on the screen;
             world.tapDown(new PointF(event.getX(), event.getY()));

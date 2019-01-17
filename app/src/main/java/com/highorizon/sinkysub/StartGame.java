@@ -13,6 +13,8 @@ public class StartGame extends Activity {
         super.onCreate(savedInstanceState);
         gameView = new GameView(this);
         setContentView(gameView);
-    	{
-	}
+        {
+        }
+    }
+
 }
