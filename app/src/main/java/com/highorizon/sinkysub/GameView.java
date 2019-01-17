@@ -115,13 +115,15 @@ public class GameView extends View {
 
         startTime = System.nanoTime();
 
-        // Start Calling Things
+        // TODO - Scale images based on screen resolution, to prevent images taking up to much, or too little screen space.
+        // --- Start Calling Things ---
+
         world.update();
 
         canvas.drawBitmap(ocean, null, screenSize, null);
         world.render(canvas);
 
-        // Stop Calling things
+        // --- Stop Calling things ---
 
         timeMillis = (System.nanoTime() - startTime) / 1000000;
         waitTime = targetTime - timeMillis;
