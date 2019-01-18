@@ -75,4 +75,8 @@ public class Sub extends Mob {
     public float getSpeed() {
         return speed;
     }
+
+    public PointF getSize() {
+        return new PointF(images[0].getWidth(), images[0].getHeight());
+    }
 }

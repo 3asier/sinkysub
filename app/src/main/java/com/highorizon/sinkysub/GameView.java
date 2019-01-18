@@ -58,7 +58,6 @@ public class GameView extends View {
     public GameView(Context context) {
         super(context);
 
-
         handler = new Handler();
         runnable = new Runnable() {
             @Override
@@ -68,38 +67,39 @@ public class GameView extends View {
         };
 
         //LOADING IMAGES
-        ocean = BitmapFactory.decodeResource(getResources(), R.drawable.ocean_background);
-        sand_0 = BitmapFactory.decodeResource(getResources(), R.drawable.sand);
-        rock_0 = BitmapFactory.decodeResource(getResources(), R.drawable.rock_0);
+        ocean = scaleImage(R.drawable.ocean_background);
+        sand_0 = scaleImage(R.drawable.sand);
+        rock_0 = scaleImage(R.drawable.rock_0);
 
-        stalTop = BitmapFactory.decodeResource(getResources(), R.drawable.stal_top);
+        stalTop = scaleImage(R.drawable.stal_top);
 
         tops = new Bitmap[] {
-                BitmapFactory.decodeResource(getResources(), R.drawable.top_0),
-                BitmapFactory.decodeResource(getResources(), R.drawable.top_1),
-                BitmapFactory.decodeResource(getResources(), R.drawable.top_2),
+                scaleImage(R.drawable.top_0),
+                scaleImage(R.drawable.top_1),
+                scaleImage(R.drawable.top_2),
         };
         bottoms = new Bitmap[] {
-                BitmapFactory.decodeResource(getResources(), R.drawable.bottom_0),
-                BitmapFactory.decodeResource(getResources(), R.drawable.bottom_1),
+                scaleImage(R.drawable.bottom_0),
+                scaleImage(R.drawable.bottom_1),
         };
 
         bubbles = new Bitmap[]{
-                BitmapFactory.decodeResource(getResources(), R.drawable.bubble_0),
-                BitmapFactory.decodeResource(getResources(), R.drawable.bubble_1),
-                BitmapFactory.decodeResource(getResources(), R.drawable.bubble_2),
-                BitmapFactory.decodeResource(getResources(), R.drawable.bubble_3),
-                BitmapFactory.decodeResource(getResources(), R.drawable.bubble_4),
-                BitmapFactory.decodeResource(getResources(), R.drawable.bubble_5),
-                BitmapFactory.decodeResource(getResources(), R.drawable.bubble_6),
-                BitmapFactory.decodeResource(getResources(), R.drawable.bubble_7)
+                scaleImage(R.drawable.bubble_0),
+                scaleImage(R.drawable.bubble_0),
+                scaleImage(R.drawable.bubble_1),
+                scaleImage(R.drawable.bubble_2),
+                scaleImage(R.drawable.bubble_3),
+                scaleImage(R.drawable.bubble_4),
+                scaleImage(R.drawable.bubble_5),
+                scaleImage(R.drawable.bubble_6),
+                scaleImage(R.drawable.bubble_7)
         };
 
         subs = new Bitmap[]{
-                BitmapFactory.decodeResource(getResources(), R.drawable.sub_0),
-                BitmapFactory.decodeResource(getResources(), R.drawable.sub_1),
-                BitmapFactory.decodeResource(getResources(), R.drawable.sub_2),
-                BitmapFactory.decodeResource(getResources(), R.drawable.sub_3)
+                scaleImage(R.drawable.sub_0),
+                scaleImage(R.drawable.sub_1),
+                scaleImage(R.drawable.sub_2),
+                scaleImage(R.drawable.sub_3)
         };
 
         display = ((Activity) getContext()).getWindowManager().getDefaultDisplay();
@@ -110,7 +110,15 @@ public class GameView extends View {
 
         screenSize = new Rect(0, 0, dWidth, dHeight);
 
-        world = new World(screenSize);
+        world = new World(screenSize, this);
+    }
+
+    private Bitmap scaleImage(int picId) {
+        BitmapFactory.Options o = new BitmapFactory.Options();
+        o.inScaled = false;
+        Bitmap temp = BitmapFactory.decodeResource(getResources(), picId, o);
+        return temp;
+        //return Bitmap.createScaledBitmap(temp, temp.getWidth(), temp.getHeight(), false);
     }
 
     @Override
@@ -163,6 +171,10 @@ public class GameView extends View {
         }
 
         return true;
+    }
+
+    public void exitToMenu() {
+        ((Activity) getContext()).finish();
     }
 
 }

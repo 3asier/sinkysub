@@ -20,7 +20,7 @@ public class BackgroundImage extends Mob {
 
     @Override
     public void render(Canvas canvas) {
-        canvas.drawBitmap(image, pos.x, pos.y, null);
+        canvas.drawBitmap(Bitmap.createScaledBitmap(image, image.getWidth(), image.getHeight(), false), pos.x, pos.y, null);
     }
 
 }

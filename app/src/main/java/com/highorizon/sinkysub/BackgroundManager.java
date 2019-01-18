@@ -38,6 +38,7 @@ public class BackgroundManager {
         //}
 
         // Cave Top
+        System.out.println(Background_Top.image.getWidth());
         int widthNum = (int) Math.ceil((float) world.screenSize.width() / Background_Top.image.getWidth()) + 1;
         for (int i = 0; i < widthNum; i++) {
             tops.add(new Background_Top(new PointF(Background_Top.image.getWidth() * i, 0), this));
