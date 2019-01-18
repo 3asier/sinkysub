@@ -24,6 +24,10 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:name=".StartGame">
         </activity>
+        <activity
+            android:name=".SkinActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
     </application>
 
 </manifest>
