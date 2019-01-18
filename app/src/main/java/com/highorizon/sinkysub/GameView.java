@@ -2,6 +2,7 @@ package com.highorizon.sinkysub;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -104,7 +105,7 @@ public class GameView extends View {
 
         display = ((Activity) getContext()).getWindowManager().getDefaultDisplay();
         point = new Point();
-        display.getSize(point);
+        display.getRealSize(point);
         dWidth = point.x;
         dHeight = point.y;
 
