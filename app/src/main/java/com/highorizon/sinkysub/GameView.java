@@ -45,6 +45,8 @@ public class GameView extends View {
     public static Bitmap[] tops;
     public static Bitmap[] bottoms;
 
+    public static Bitmap stalTop;
+
     //Bubble Textures.
     public static Bitmap[] bubbles;
 
@@ -69,6 +71,8 @@ public class GameView extends View {
         ocean = BitmapFactory.decodeResource(getResources(), R.drawable.ocean_background);
         sand_0 = BitmapFactory.decodeResource(getResources(), R.drawable.sand);
         rock_0 = BitmapFactory.decodeResource(getResources(), R.drawable.rock_0);
+
+        stalTop = BitmapFactory.decodeResource(getResources(), R.drawable.stal_top);
 
         tops = new Bitmap[] {
                 BitmapFactory.decodeResource(getResources(), R.drawable.top_0),
