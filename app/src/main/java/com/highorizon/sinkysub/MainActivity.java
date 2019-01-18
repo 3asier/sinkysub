@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
 public class MainActivity extends Activity {
 
@@ -18,6 +19,19 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        //Get skins button
+        Button skins = findViewById(R.id.button);
+
+        //on click open up skins activity
+        skins.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), SkinActivity.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
+
     }
 
     public void startGame(View view) {
