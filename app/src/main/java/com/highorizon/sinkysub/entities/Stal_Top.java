@@ -5,16 +5,17 @@ import android.graphics.Canvas;
 import android.graphics.PointF;
 
 import com.highorizon.sinkysub.GameView;
+import com.highorizon.sinkysub.Images;
 import com.highorizon.sinkysub.Sub;
 import com.highorizon.sinkysub.World;
 
 public class Stal_Top extends BackgroundImage {
 
-    public static Bitmap image = GameView.stalTop;
+    public static Bitmap image = Images.stalTop;
     private World world;
 
     public Stal_Top(PointF pos, World world) {
-        super(pos, GameView.stalTop, world.player.getSpeed());
+        super(pos, Images.stalTop, world.player.getSpeed());
 
         this.world = world;
     }

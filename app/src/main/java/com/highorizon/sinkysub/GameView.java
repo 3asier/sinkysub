@@ -38,22 +38,6 @@ public class GameView extends View {
     int dWidth, dHeight; //Displays width and height
     Rect screenSize;
 
-    //Background Textures.
-    public static Bitmap ocean;
-    public static Bitmap sand_0;
-    public static Bitmap rock_0;
-
-    public static Bitmap[] tops;
-    public static Bitmap[] bottoms;
-
-    public static Bitmap stalTop;
-
-    //Bubble Textures.
-    public static Bitmap[] bubbles;
-
-    //Sub Textures.
-    public static Bitmap[] subs;
-
     World world;
 
     public GameView(Context context) {
@@ -67,41 +51,7 @@ public class GameView extends View {
             }
         };
 
-        //LOADING IMAGES
-        ocean = scaleImage(R.drawable.ocean_background);
-        sand_0 = scaleImage(R.drawable.sand);
-        rock_0 = scaleImage(R.drawable.rock_0);
-
-        stalTop = scaleImage(R.drawable.stal_top);
-
-        tops = new Bitmap[] {
-                scaleImage(R.drawable.top_0),
-                scaleImage(R.drawable.top_1),
-                scaleImage(R.drawable.top_2),
-        };
-        bottoms = new Bitmap[] {
-                scaleImage(R.drawable.bottom_0),
-                scaleImage(R.drawable.bottom_1),
-        };
-
-        bubbles = new Bitmap[]{
-                scaleImage(R.drawable.bubble_0),
-                scaleImage(R.drawable.bubble_0),
-                scaleImage(R.drawable.bubble_1),
-                scaleImage(R.drawable.bubble_2),
-                scaleImage(R.drawable.bubble_3),
-                scaleImage(R.drawable.bubble_4),
-                scaleImage(R.drawable.bubble_5),
-                scaleImage(R.drawable.bubble_6),
-                scaleImage(R.drawable.bubble_7)
-        };
-
-        subs = new Bitmap[]{
-                scaleImage(R.drawable.sub_0),
-                scaleImage(R.drawable.sub_1),
-                scaleImage(R.drawable.sub_2),
-                scaleImage(R.drawable.sub_3)
-        };
+        Images.getInstance().init(getResources());
 
         display = ((Activity) getContext()).getWindowManager().getDefaultDisplay();
         point = new Point();
@@ -133,7 +83,7 @@ public class GameView extends View {
 
         world.update();
 
-        canvas.drawBitmap(ocean, null, screenSize, null);
+        canvas.drawBitmap(Images.ocean, null, screenSize, null);
         world.render(canvas);
 
         // --- Stop Calling things ---

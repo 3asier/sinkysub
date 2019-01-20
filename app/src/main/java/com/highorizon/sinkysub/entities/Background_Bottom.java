@@ -5,14 +5,15 @@ import android.graphics.PointF;
 
 import com.highorizon.sinkysub.BackgroundManager;
 import com.highorizon.sinkysub.GameView;
+import com.highorizon.sinkysub.Images;
 
 public class Background_Bottom extends BackgroundImage{
 
-    public static Bitmap image = GameView.bottoms[0];
+    public static Bitmap image = Images.bottoms[0];
 
     public Background_Bottom(PointF pos, BackgroundManager backgroundManager) {
-        super(pos, GameView.bottoms[0], backgroundManager.world.player.getSpeed());
-        image = GameView.bottoms[random.nextInt(GameView.bottoms.length)];
+        super(pos, Images.bottoms[0], backgroundManager.world.player.getSpeed());
+        image = Images.bottoms[random.nextInt(Images.bottoms.length)];
         super.image = image;
     }
 

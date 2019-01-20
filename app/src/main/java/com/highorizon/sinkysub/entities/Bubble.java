@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.PointF;
 
 import com.highorizon.sinkysub.GameView;
+import com.highorizon.sinkysub.Images;
 import com.highorizon.sinkysub.World;
 
 public class Bubble extends Mob {
@@ -17,7 +18,7 @@ public class Bubble extends Mob {
     private int age = 0;
     private int animScale = random.nextInt(4) + 1;
 
-    private Bitmap[] images = GameView.bubbles;
+    private Bitmap[] images = Images.bubbles;
 
     public Bubble(PointF pos, World world) {
         super(pos, 0, 0);

@@ -21,7 +21,7 @@ public class Sub extends Mob {
     private int animCount = 0;
     private int animScale = random.nextInt(4) + 1;
 
-    private Bitmap[] images = GameView.subs;
+    private Bitmap[] images = Images.subs;
     private Rect hitBox;
 
     private boolean tap = false;
