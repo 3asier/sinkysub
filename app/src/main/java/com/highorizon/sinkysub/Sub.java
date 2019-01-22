@@ -6,10 +6,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
-import android.support.v4.graphics.ColorUtils;
 
 import com.highorizon.sinkysub.entities.Bubble;
 import com.highorizon.sinkysub.entities.Mob;
+import com.highorizon.sinkysub.images.CollisionMap;
+import com.highorizon.sinkysub.images.Images;
 
 public class Sub extends Mob {
 
@@ -22,14 +23,13 @@ public class Sub extends Mob {
     private int animScale = random.nextInt(4) + 1;
 
     private Bitmap[] images = Images.subs;
-    private Rect hitBox;
 
     private boolean tap = false;
 
     public Sub(World world) {
         super(new PointF(world.screenSize.width() / 9, world.screenSize.height() / 3), 0.0f, 0.0f);
         this.world = world;
-        hitBox = new Rect();
+        collisionMap = new CollisionMap(this, Images.sub_collisionMap);
     }
 
     @Override

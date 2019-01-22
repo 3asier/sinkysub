@@ -66,6 +66,12 @@ public class World {
             }
         }
 
+        // Collision
+        for (Stal_Top st : stals) {
+            if (player.collision(st)) parent.exitToMenu();
+        }
+
+        // Clean Up the new and old entities
         entities.removeAll(oldEntities);
         entities.addAll(newEntities);
 

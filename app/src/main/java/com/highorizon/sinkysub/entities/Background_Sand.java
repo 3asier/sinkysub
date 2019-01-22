@@ -1,12 +1,9 @@
 package com.highorizon.sinkysub.entities;
 
 import android.graphics.Bitmap;
-import android.graphics.Point;
 import android.graphics.PointF;
 
-import com.highorizon.sinkysub.BackgroundManager;
-import com.highorizon.sinkysub.GameView;
-import com.highorizon.sinkysub.Images;
+import com.highorizon.sinkysub.images.Images;
 
 public class Background_Sand extends BackgroundImage {
 

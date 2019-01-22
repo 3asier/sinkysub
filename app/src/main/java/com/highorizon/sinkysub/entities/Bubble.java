@@ -4,8 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 
-import com.highorizon.sinkysub.GameView;
-import com.highorizon.sinkysub.Images;
+import com.highorizon.sinkysub.images.Images;
 import com.highorizon.sinkysub.World;
 
 public class Bubble extends Mob {

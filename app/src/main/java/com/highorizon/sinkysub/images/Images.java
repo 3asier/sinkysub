@@ -1,9 +1,10 @@
-package com.highorizon.sinkysub;
+package com.highorizon.sinkysub.images;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
+
+import com.highorizon.sinkysub.R;
 
 public class Images {
 
@@ -20,12 +21,14 @@ public class Images {
     public static Bitmap[] bottoms;
 
     public static Bitmap stalTop;
+    public static Bitmap stalTop_collisionMap;
 
     //Bubble Textures.
     public static Bitmap[] bubbles;
 
     //Sub Textures.
     public static Bitmap[] subs;
+    public static Bitmap sub_collisionMap;
 
     private Images() {
 
@@ -40,6 +43,7 @@ public class Images {
         rock_0 = scaleImage(R.drawable.rock_0);
 
         stalTop = scaleImage(R.drawable.stal_top);
+        stalTop_collisionMap = scaleImage(R.drawable.stal_top_collision_map);
 
         tops = new Bitmap[] {
                 scaleImage(R.drawable.top_0),
@@ -69,6 +73,7 @@ public class Images {
                 scaleImage(R.drawable.sub_2),
                 scaleImage(R.drawable.sub_3)
         };
+        sub_collisionMap = scaleImage(R.drawable.sub_collision_map);
     }
 
     private Bitmap scaleImage(int picId) {
