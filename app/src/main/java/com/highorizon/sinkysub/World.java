@@ -1,13 +1,16 @@
 package com.highorizon.sinkysub;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.Rect;
 
-import com.highorizon.sinkysub.entities.Bubble;
+import com.highorizon.sinkysub.entities.Cave_Bottom;
+import com.highorizon.sinkysub.entities.Cave_Top;
 import com.highorizon.sinkysub.entities.Entity;
-import com.highorizon.sinkysub.entities.Stal_Top;
+import com.highorizon.sinkysub.entities.Mob;
+import com.highorizon.sinkysub.entities.Stalactite;
+import com.highorizon.sinkysub.entities.Stalactite_Bottom;
+import com.highorizon.sinkysub.entities.Stalactite_Top;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -22,68 +25,66 @@ public class World {
 
     public Sub player;
 
-    private BackgroundManager backgroundManager;
-
     private ArrayList<Entity> entities = new ArrayList<>();
 
     private ArrayList<Entity> newEntities = new ArrayList<>();
     private ArrayList<Entity> oldEntities = new ArrayList<>();
 
-    private ArrayList<Bubble> bubbles = new ArrayList<>();
-
-    private ArrayList<Bubble> newBubbles= new ArrayList<>();
-    private ArrayList<Bubble> oldBubbles = new ArrayList<>();
-
-    private ArrayList<Stal_Top> stals = new ArrayList<>();
-
-    private ArrayList<Stal_Top> newStals= new ArrayList<>();
-    private ArrayList<Stal_Top> oldStals = new ArrayList<>();
-
-
-
-
     public World(Rect screenSize, GameView parent) {
         this.screenSize = screenSize;
         this.parent = parent;
 
+        // PLAYER IS ALWAYS THE FIRST ENTITY
         player = new Sub(this);
-        backgroundManager = new BackgroundManager(this);
+        entities.add(player);
+
+        initCave();
+    }
+
+    /**
+     * Tiles the initial set of cave tops and bottoms across the screen.
+     */
+    private void initCave() {
+        int tileNumber = (int) Math.ceil((float) screenSize.width() / Cave_Top.size.x) + 1;
+
+        for (int i = 0; i < tileNumber; i++) {
+            entities.add(new Cave_Top(new PointF(i * Cave_Top.size.x, 0.0f), this));
+        }
+
+        tileNumber = (int) Math.ceil((float) screenSize.width() / Cave_Bottom.size.x) + 1;
+        for (int i = 0; i < tileNumber; i++) {
+            entities.add(new Cave_Bottom(new PointF(i * Cave_Bottom.size.x, screenSize.height() - Cave_Bottom.size.y), this));
+        }
     }
 
     public void update() {
 
-        backgroundManager.update();
-        for (Bubble b : bubbles) b.update();
-        for (Stal_Top s : stals) s.update();
-
-        player.update();
+        // Update all entities in the world.
+        for (Entity e : entities) {
+            e.update();
+        }
 
 
         // Add the stalactites.
-        if (random.nextInt((int) (500 / player.getSpeed())) == 0) {
-            if (stals.isEmpty() || (screenSize.width() - stals.get(stals.size() - 1).getPos().x) > Stal_Top.image.getWidth() * 2) {
-                stals.add(new Stal_Top(new PointF(screenSize.width(), random.nextInt(20)), this));
-            }
+        Stalactite.timer++;
+        if (Stalactite.timer > 100) {
+            if (random.nextBoolean()) entities.add(new Stalactite_Top(this));
+            else entities.add(new Stalactite_Bottom(this));
+            Stalactite.timer = 0;
         }
 
         // Collision
-        for (Stal_Top st : stals) {
-            if (player.collision(st)) parent.exitToMenu();
-        }
+
 
         // Clean Up the new and old entities
         entities.removeAll(oldEntities);
         entities.addAll(newEntities);
 
-        bubbles.removeAll(oldBubbles);
-        bubbles.addAll(newBubbles);
+        oldEntities.clear();
+        newEntities.clear();
 
-        stals.removeAll(oldStals);
-        stals.addAll(newStals);
-
-        newBubbles.clear();
-        oldBubbles.clear();
-        oldStals.clear();
+        // Check to see if the player has been removed from the world.
+        if (!entities.contains(player)) parent.exitToMenu();
     }
 
     public void add(Entity e) {
@@ -94,20 +95,15 @@ public class World {
         oldEntities.add(e);
     }
 
-    public void add(Bubble b) {
-        newBubbles.add(b);
-    }
-
-    public void remove(Bubble b) {
-        oldBubbles.add(b);
+    public ArrayList<Entity> getEntities() {
+        return entities;
     }
 
     public void render(Canvas canvas) {
-        for (Stal_Top s : stals) s.render(canvas);
-
-        backgroundManager.render(canvas);
-        for (Bubble b : bubbles) b.render(canvas);
-
+        for (Entity e : entities) {
+            if (e instanceof Mob && !(e instanceof Sub)) ((Mob) e).render(canvas);
+        }
+        // Render the player last
         player.render(canvas);
     }
 

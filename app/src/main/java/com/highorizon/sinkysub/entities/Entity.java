@@ -11,6 +11,10 @@ public abstract class Entity {
         this.pos = pos;
     }
 
+    public void update() {
+
+    }
+
     public void setPos(PointF pos) {
         this.pos = pos;
     }

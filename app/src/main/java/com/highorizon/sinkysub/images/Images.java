@@ -8,6 +8,8 @@ import com.highorizon.sinkysub.R;
 
 public class Images {
 
+    private static final float SCALE = 2.0f;
+
     private static final Images instance = new Images();
 
     private Resources resources;
@@ -22,6 +24,8 @@ public class Images {
 
     public static Bitmap stalTop;
     public static Bitmap stalTop_collisionMap;
+    public static Bitmap stalBot;
+    public static Bitmap stalBot_collisionMap;
 
     //Bubble Textures.
     public static Bitmap[] bubbles;
@@ -44,6 +48,9 @@ public class Images {
 
         stalTop = scaleImage(R.drawable.stal_top);
         stalTop_collisionMap = scaleImage(R.drawable.stal_top_collision_map);
+
+        stalBot = scaleImage(R.drawable.stal_bot);
+        stalBot_collisionMap = scaleImage(R.drawable.stal_bot);
 
         tops = new Bitmap[] {
                 scaleImage(R.drawable.top_0),
@@ -80,8 +87,8 @@ public class Images {
         BitmapFactory.Options o = new BitmapFactory.Options();
         o.inScaled = false;
         Bitmap temp = BitmapFactory.decodeResource(resources, picId, o);
-        return temp;
-        //return Bitmap.createScaledBitmap(temp, temp.getWidth(), temp.getHeight(), false);
+        //return temp;
+        return Bitmap.createScaledBitmap(temp, (int) (temp.getWidth() * SCALE), (int) (temp.getHeight() * SCALE), false);
     }
 
     public static Images getInstance() {

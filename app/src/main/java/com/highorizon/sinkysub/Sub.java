@@ -8,7 +8,9 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 
 import com.highorizon.sinkysub.entities.Bubble;
+import com.highorizon.sinkysub.entities.Entity;
 import com.highorizon.sinkysub.entities.Mob;
+import com.highorizon.sinkysub.entities.World_Object;
 import com.highorizon.sinkysub.images.CollisionMap;
 import com.highorizon.sinkysub.images.Images;
 
@@ -34,6 +36,7 @@ public class Sub extends Mob {
 
     @Override
     public void update() {
+        speed += 0.02f;
         if (animCount >= images.length * animScale - 1) animCount = 0;
         animCount++;
 
@@ -49,6 +52,16 @@ public class Sub extends Mob {
         clampVel();
 
         super.move();
+        checkCollision();
+    }
+
+    public void checkCollision() {
+        for (Entity e : world.getEntities()) {
+            if (e instanceof World_Object) {
+                World_Object wo = (World_Object) e;
+                if (collision(wo)) wo.onCollision(this);
+            }
+        }
     }
 
     private void clampVel() {

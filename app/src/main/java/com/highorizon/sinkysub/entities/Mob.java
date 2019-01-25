@@ -10,7 +10,7 @@ import com.highorizon.sinkysub.images.CollisionMap;
 
 import java.util.Random;
 
-public class Mob extends Entity {
+public abstract class Mob extends Entity {
 
     protected float xVel, yVel;
     protected Random random = new Random();
@@ -33,6 +33,9 @@ public class Mob extends Entity {
     }
 
     public boolean collision(Mob mob) {
+        // If either of the mobs has no collision map, collision can not occur.
+        if (mob.collisionMap == null|| this.collisionMap == null) return false;
+
         // Updating collision maps...
         this.collisionMap.update();
         mob.collisionMap.update();
@@ -46,11 +49,7 @@ public class Mob extends Entity {
     }
 
     protected boolean coarseCollision(Mob mob) {
-        // If either of the mobs has no collision map, collision can not occur.
-        if (mob.collisionMap == null|| this.collisionMap == null) return false;
-
-        // Else, both mobs have collision maps.
-        // Check to see if there's any overlap between the two.
+        // Check to see if there's any overlap between the two collision maps.
         if (collisionMap.left < mob.collisionMap.right // Left side of 1st is less than Right side of the Other...
         && collisionMap.right > mob.collisionMap.left // AND Right side of 1st is greater than Left side of the Other...
         && collisionMap.top < mob.collisionMap.bottom // Similar for the top and bottom.
@@ -88,6 +87,10 @@ public class Mob extends Entity {
             }
         }
         return false;
+    }
+
+    public void onCollision(Mob mob) {
+
     }
 
     public void render(Canvas Canvas) {
