@@ -21,6 +21,9 @@ public class GameView extends View {
     Handler handler; //Schedules a runnable after a certain delay
     Runnable runnable;
 
+    public static float BASE_SCALE = 1.5f;
+    public static float SCALE = BASE_SCALE;
+
     // Frame Limiter Variables
     private final int MAX_FPS = 30;
     private double averageFPS;
@@ -52,8 +55,6 @@ public class GameView extends View {
             }
         };
 
-        Images.getInstance().init(getResources());
-
         display = ((Activity) getContext()).getWindowManager().getDefaultDisplay();
         point = new Point();
         display.getRealSize(point);
@@ -61,6 +62,9 @@ public class GameView extends View {
         dHeight = point.y;
 
         screenSize = new Rect(0, 0, dWidth, dHeight);
+        SCALE = BASE_SCALE * screenSize.height() / 1080;
+
+        Images.getInstance().init(getResources());
 
         world = new World(screenSize, this);
     }
@@ -84,7 +88,7 @@ public class GameView extends View {
 
         world.update();
 
-        canvas.drawBitmap(Images.ocean, null, screenSize, null);
+        //canvas.drawBitmap(Images.ocean, null, screenSize, null);
         world.render(canvas);
 
         // --- Stop Calling things ---

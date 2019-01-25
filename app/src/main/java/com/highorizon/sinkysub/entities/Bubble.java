@@ -26,6 +26,7 @@ public class Bubble extends Mob {
 
     public void update() {
         if (age >= images.length * animScale - 1) world.remove(this);
+        if (pos.x < -images[0].getWidth() || pos.y < -images[0].getHeight()) world.remove(this);
         age++;
 
         yVel -= 2.0f;

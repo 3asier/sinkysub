@@ -6,9 +6,9 @@ import android.graphics.BitmapFactory;
 
 import com.highorizon.sinkysub.R;
 
-public class Images {
+import static com.highorizon.sinkysub.GameView.SCALE;
 
-    private static final float SCALE = 2.0f;
+public class Images {
 
     private static final Images instance = new Images();
 
@@ -42,7 +42,7 @@ public class Images {
         this.resources = resources;
 
         //LOADING IMAGES
-        ocean = scaleImage(R.drawable.ocean_background);
+        //ocean = scaleImage(R.drawable.ocean_background);
         sand_0 = scaleImage(R.drawable.sand);
         rock_0 = scaleImage(R.drawable.rock_0);
 
@@ -88,6 +88,7 @@ public class Images {
         o.inScaled = false;
         Bitmap temp = BitmapFactory.decodeResource(resources, picId, o);
         //return temp;
+        System.out.println(SCALE);
         return Bitmap.createScaledBitmap(temp, (int) (temp.getWidth() * SCALE), (int) (temp.getHeight() * SCALE), false);
     }
 

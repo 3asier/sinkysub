@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.Rect;
 
+import com.highorizon.sinkysub.entities.Bubble;
 import com.highorizon.sinkysub.entities.Cave_Bottom;
 import com.highorizon.sinkysub.entities.Cave_Top;
 import com.highorizon.sinkysub.entities.Entity;
@@ -67,18 +68,17 @@ public class World {
 
         // Add the stalactites.
         Stalactite.timer++;
-        if (Stalactite.timer > 100) {
+        if (Stalactite.timer > 1000 / player.getSpeed()) {
             if (random.nextBoolean()) entities.add(new Stalactite_Top(this));
             else entities.add(new Stalactite_Bottom(this));
             Stalactite.timer = 0;
         }
 
-        // Collision
-
-
         // Clean Up the new and old entities
         entities.removeAll(oldEntities);
         entities.addAll(newEntities);
+
+        for (Entity e : oldEntities) e = null;
 
         oldEntities.clear();
         newEntities.clear();
@@ -101,7 +101,14 @@ public class World {
 
     public void render(Canvas canvas) {
         for (Entity e : entities) {
-            if (e instanceof Mob && !(e instanceof Sub)) ((Mob) e).render(canvas);
+            if (e instanceof Stalactite) {
+                ((Mob) e).render(canvas);
+            }
+        }
+        for (Entity e : entities) {
+            if (e instanceof Mob && !(e instanceof Sub) && !(e instanceof Stalactite)) {
+                ((Mob) e).render(canvas);
+            }
         }
         // Render the player last
         player.render(canvas);

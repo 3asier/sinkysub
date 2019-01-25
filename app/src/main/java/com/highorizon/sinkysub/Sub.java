@@ -18,7 +18,7 @@ public class Sub extends Mob {
 
     private World world;
 
-    private float maxYVel = 20.0f;
+    private float maxYVel = 30.0f;
     private float speed = 10.0f;
 
     private int animCount = 0;
