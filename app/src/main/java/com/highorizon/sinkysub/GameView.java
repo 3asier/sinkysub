@@ -69,14 +69,6 @@ public class GameView extends View {
         world = new World(screenSize, this);
     }
 
-    private Bitmap scaleImage(int picId) {
-        BitmapFactory.Options o = new BitmapFactory.Options();
-        o.inScaled = false;
-        Bitmap temp = BitmapFactory.decodeResource(getResources(), picId, o);
-        return temp;
-        //return Bitmap.createScaledBitmap(temp, temp.getWidth(), temp.getHeight(), false);
-    }
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -98,6 +90,8 @@ public class GameView extends View {
 
         if (waitTime > 0) { // Wait the required time.
                 this.postDelayed(runnable, waitTime);
+        } else {
+            this.postDelayed(runnable, 0);
         }
 
         totalTime += System.nanoTime() - startTime + waitTime * 1000000;
