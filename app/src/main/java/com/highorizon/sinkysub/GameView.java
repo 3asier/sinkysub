@@ -75,12 +75,14 @@ public class GameView extends View {
 
         startTime = System.nanoTime();
 
-        // TODO - Scale images based on screen resolution, to prevent images taking up to much, or too little screen space.
         // --- Start Calling Things ---
 
         world.update();
 
-        //canvas.drawBitmap(Images.ocean, null, screenSize, null);
+        // Draw the background
+        canvas.drawBitmap(Images.ocean, null, screenSize, null);
+
+        //Draw the world
         world.render(canvas);
 
         // --- Stop Calling things ---
@@ -89,7 +91,7 @@ public class GameView extends View {
         waitTime = targetTime - timeMillis;
 
         if (waitTime > 0) { // Wait the required time.
-                this.postDelayed(runnable, waitTime);
+            this.postDelayed(runnable, waitTime);
         } else {
             this.postDelayed(runnable, 0);
         }
@@ -108,16 +110,15 @@ public class GameView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
-	int pointerCount = event.getPointerCount();
+        int pointerCount = event.getPointerCount();
 
-	if(pointerCount == 5) {
-	    Toast.makeText(getContext(), "Looks like you got ligma!", Toast.LENGTH_SHORT).show();
-	}
-	if (action == MotionEvent.ACTION_DOWN) { //A tap on the screen;
-            world.tapDown(new PointF(event.getX(), event.getY()));
+        if (pointerCount == 5) {
+            Toast.makeText(getContext(), "Looks like you got ligma!", Toast.LENGTH_SHORT).show();
         }
         if (action == MotionEvent.ACTION_UP) { //Input released from screen
             world.tapUp(new PointF(event.getX(), event.getY()));
+        } else if (action == MotionEvent.ACTION_DOWN) { //A tap on the screen;
+            world.tapDown(new PointF(event.getX(), event.getY()));
         }
 
         return true;

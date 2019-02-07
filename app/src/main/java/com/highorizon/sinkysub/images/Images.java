@@ -42,7 +42,7 @@ public class Images {
         this.resources = resources;
 
         //LOADING IMAGES
-        //ocean = scaleImage(R.drawable.ocean_background);
+        ocean = scaleImage(R.drawable.ocean_background);
         sand_0 = scaleImage(R.drawable.sand);
         rock_0 = scaleImage(R.drawable.rock_0);
 

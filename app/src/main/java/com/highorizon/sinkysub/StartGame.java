@@ -19,7 +19,7 @@ public class StartGame extends Activity {
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-        gameView.setBackgroundResource(R.drawable.ocean_background);
+        //gameView.setBackgroundResource(R.drawable.ocean_background);
         setContentView(gameView);
     }
 
