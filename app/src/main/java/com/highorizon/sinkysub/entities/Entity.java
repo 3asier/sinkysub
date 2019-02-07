@@ -11,7 +11,13 @@ public abstract class Entity {
         this.pos = pos;
     }
 
-    public void update() {
+    /**
+     * Updates the entity taking into account the number of milliseconds that have passed since
+     * the last update.
+     *
+     * @param dt
+     */
+    public void update(long dt) {
 
     }
 

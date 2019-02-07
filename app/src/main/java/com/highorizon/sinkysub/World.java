@@ -58,11 +58,11 @@ public class World {
         }
     }
 
-    public void update() {
+    public void update(long dt) {
 
         // Update all entities in the world.
         for (Entity e : entities) {
-            e.update();
+            e.update(dt);
         }
 
 

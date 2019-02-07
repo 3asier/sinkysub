@@ -12,8 +12,8 @@ public class Stalactite extends World_Object {
         super(new PointF(world.screenSize.width(), 0), world);
     }
 
-    public void update() {
-        super.update();
+    public void update(long dt) {
+        super.update(dt);
     }
 
 }

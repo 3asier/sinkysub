@@ -18,8 +18,8 @@ public class Cave_Bottom extends World_Object{
         collisionMap = new CollisionMap(this, Images.bottoms[imageNumber]);
     }
 
-    public void update() {
-        super.update();
+    public void update(long dt) {
+        super.update(dt);
 
         if (pos.x < -image.getWidth()) { // This cave section is fully off the screen.
             world.add(new Cave_Bottom(new PointF(pos.x + world.screenSize.width() + size.x, world.screenSize.height() - image.getHeight()), world));

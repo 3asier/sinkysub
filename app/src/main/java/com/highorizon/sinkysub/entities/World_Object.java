@@ -26,9 +26,9 @@ public abstract class World_Object extends Mob {
     }
 
     @Override
-    public void update() {
+    public void update(long dt) {
         xVel = -world.player.getSpeed();
-        super.move();
+        super.move(dt);
     }
 
     public void onCollision(Mob mob) {

@@ -35,6 +35,11 @@ public class GameView extends View {
     long totalTime = 0;
     long targetTime = 1000 / MAX_FPS;
 
+    long lastTime = System.nanoTime();
+    long thisTime = lastTime;
+    long dt = thisTime - lastTime; // The change in time
+    long st = System.nanoTime();
+
     Bitmap background_0;
 
     Display display;
@@ -75,12 +80,18 @@ public class GameView extends View {
 
         startTime = System.nanoTime();
 
-        // --- Start Calling Things ---
+        // Calculate the amount of time passed since the last update.
+        thisTime = System.nanoTime();
+        dt = thisTime - lastTime;
+        lastTime = System.nanoTime(); // Set lastTime to keep track of the starting time for the next loop.
 
-        world.update();
+        // Making changes to 'dt' or replacing it with a different variable will cause the time scale of the game to change.
+
+        world.update(dt); // Update the game world respective of how much time has passed.
+
 
         // Draw the background
-        canvas.drawBitmap(Images.ocean, null, screenSize, null);
+        //canvas.drawBitmap(Images.ocean, null, screenSize, null);
 
         //Draw the world
         world.render(canvas);
@@ -90,7 +101,7 @@ public class GameView extends View {
         timeMillis = (System.nanoTime() - startTime) / 1000000;
         waitTime = targetTime - timeMillis;
 
-        if (waitTime > 0) { // Wait the required time.
+        /*if (waitTime > 0) { // Wait the required time.
             this.postDelayed(runnable, waitTime);
         } else {
             this.postDelayed(runnable, 0);
@@ -104,7 +115,15 @@ public class GameView extends View {
             frameCount = 0;
             totalTime = 0;
             System.out.println("AVERAGE FPS: " + averageFPS);
+        }*/
+        frameCount++;
+        if (st + 1000000000 < System.nanoTime()) {
+            System.out.println(frameCount);
+            frameCount = 0;
+            st = System.nanoTime();
         }
+
+        this.post(runnable);
     }
 
     @Override

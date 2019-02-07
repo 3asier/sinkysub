@@ -23,13 +23,20 @@ public abstract class Mob extends Entity {
         this.yVel = yVel;
     }
 
-    public void update() {
+    @Override
+    public void update(long dt) {
 
     }
 
-    protected void move() {
-        pos.x += xVel;
-        pos.y += yVel;
+    /**
+     * Move the mobile entity according to its x and y velocity, also taking into account the
+     * number of milliseconds that have passed.
+     *
+     * @param dt
+     */
+    protected void move(long dt) {
+        pos.x += xVel * (dt / 1000000);
+        pos.y += yVel * (dt / 1000000);
     }
 
     public boolean collision(Mob mob) {

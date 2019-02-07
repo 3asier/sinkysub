@@ -18,11 +18,11 @@ public class Sub extends Mob {
 
     private World world;
 
-    private float maxYVel = 30.0f;
-    private float speed = 10.0f;
+    private float maxYVel = 1.0f;
+    private float speed = 0.2f;
 
     private int animCount = 0;
-    private int animScale = random.nextInt(4) + 1;
+    private int animScale = random.nextInt(4) + 100;
 
     private Bitmap[] images = Images.subs;
 
@@ -35,15 +35,15 @@ public class Sub extends Mob {
     }
 
     @Override
-    public void update() {
-        speed += 0.02f;
+    public void update(long dt) {
+        speed += 0.002f;
         if (animCount >= images.length * animScale - 1) animCount = 0;
-        animCount++;
+        animCount += (int) (dt / 1000000);
 
         if (tap) {
-            yVel -= 2.0;
+            yVel -= 0.05;
         } else {
-            yVel += 2.0;
+            yVel += 0.05;
         }
 
         if (random.nextInt(2) == 0)
@@ -51,7 +51,7 @@ public class Sub extends Mob {
 
         clampVel();
 
-        super.move();
+        super.move(dt);
         checkCollision();
     }
 
@@ -82,7 +82,7 @@ public class Sub extends Mob {
         Paint p = new Paint();
         p.setColor(Color.RED);
         canvas.rotate(yVel, pos.x + images[0].getWidth() / 2, pos.y + images[0].getHeight() / 2);
-        canvas.drawBitmap(images[(int) Math.floor(animCount / animScale)], pos.x, pos.y, null);
+        canvas.drawBitmap(images[(int) (Math.floor(animCount / animScale) % images.length)], pos.x, pos.y, null);
     }
 
     public float getSpeed() {

@@ -14,8 +14,8 @@ public class BackgroundImage extends Mob {
     }
 
     @Override
-    public void update() {
-        super.move();
+    public void update(long dt) {
+        super.move(dt);
     }
 
     @Override
