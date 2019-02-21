@@ -25,4 +25,13 @@
         android:background="@drawable/play"
         android:onClick="startGame" />
 
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-8830036258425445/2888472703" />
+
 </RelativeLayout>

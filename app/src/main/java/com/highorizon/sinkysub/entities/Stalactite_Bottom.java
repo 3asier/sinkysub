@@ -16,7 +16,7 @@ public class Stalactite_Bottom extends Stalactite {
 
         float range = (world.screenSize.height() - image.getHeight()) / 2.0f;
 
-        pos.y = world.screenSize.height() - random.nextInt((int) Cave_Bottom.size.y) - image.getHeight();
+        pos.y = (int) Math.max(world.cave.bottomSegments.get(world.cave.bottomSegments.size() - 1).y, world.cave.bottomSegments.get(world.cave.bottomSegments.size() - 2).y) + random.nextInt(world.cave.verticalBound) - image.getHeight();
     }
 
 }

@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.Rect;
 
+import com.highorizon.sinkysub.cave.CaveGen;
 import com.highorizon.sinkysub.entities.Bubble;
 import com.highorizon.sinkysub.entities.Cave_Bottom;
 import com.highorizon.sinkysub.entities.Cave_Top;
@@ -31,15 +32,20 @@ public class World {
     private ArrayList<Entity> newEntities = new ArrayList<>();
     private ArrayList<Entity> oldEntities = new ArrayList<>();
 
+    public CaveGen cave;
+
     public World(Rect screenSize, GameView parent) {
         this.screenSize = screenSize;
         this.parent = parent;
+
+        //Generate the cave
+        cave = new CaveGen(this);
 
         // PLAYER IS ALWAYS THE FIRST ENTITY
         player = new Sub(this);
         entities.add(player);
 
-        initCave();
+        //initCave();
     }
 
     /**
@@ -67,12 +73,14 @@ public class World {
 
 
         // Add the stalactites.
-        Stalactite.timer++;
+        Stalactite.timer += (dt / 1000000);
         if (Stalactite.timer > 1000 / player.getSpeed()) {
             if (random.nextBoolean()) entities.add(new Stalactite_Top(this));
             else entities.add(new Stalactite_Bottom(this));
             Stalactite.timer = 0;
         }
+
+        cave.update(dt);
 
         // Clean Up the new and old entities
         entities.removeAll(oldEntities);
@@ -112,6 +120,8 @@ public class World {
         }
         // Render the player last
         player.render(canvas);
+
+        cave.render(canvas);
     }
 
     public void tapDown(PointF pointF) {
